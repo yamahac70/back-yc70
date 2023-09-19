@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model Colecciones{
+  id Int @id @default(autoincrement())
+  nombre String
+  contenido Contenido[]
+
+}
+model Contenido{
+  id Int @id @default(autoincrement())
+  tvg_logo String
+  tvg_group String
+  titulo String
+  url String
+  estado Boolean
+  idColeccion Int
+  coleccion Colecciones @relation(fields: [idColeccion], references: [id])
+}
